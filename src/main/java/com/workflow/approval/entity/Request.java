@@ -1,8 +1,10 @@
 package com.workflow.approval.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Getter
 @Setter
@@ -26,6 +28,7 @@ public class Request {
 
     @ManyToOne
     @JoinColumn(name="createdBy", nullable = false)
+    @JsonIgnoreProperties({"requests"})
     private User createdBy;
 
     @Column(nullable = false)
