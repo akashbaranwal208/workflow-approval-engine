@@ -16,7 +16,7 @@ public class CorsConfig {
 
         config.setAllowedOrigins(Arrays.asList(
                 "http://localhost:5173",
-                "https://your-frontend-url.com"
+                "http://localhost:5173"
         ));
 
         config.setAllowedMethods(Arrays.asList(
