@@ -9,6 +9,7 @@ import com.workflow.approval.exception.ResourceNotFoundException;
 import com.workflow.approval.service.RequestService;
 import com.workflow.approval.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,9 +28,10 @@ public class RequestController {
 
     @PostMapping
     public ResponseEntity<Request> createRequest(@RequestParam RequestType requestType,
-                                                 @RequestParam String userEmail)
+                                                 Authentication authentication)
     {
 
+        String userEmail=authentication.getName();
         User user=userService.getUserByEmail(userEmail)
                 .orElseThrow(()->new ResourceNotFoundException("User Not Found: " + userEmail));
 
