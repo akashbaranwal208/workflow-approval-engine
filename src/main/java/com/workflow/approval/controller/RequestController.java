@@ -32,6 +32,8 @@ public class RequestController {
     {
 
         String userEmail=authentication.getName();
+        System.out.println("Authentication: " + authentication);
+        System.out.println(userEmail);
         User user=userService.getUserByEmail(userEmail)
                 .orElseThrow(()->new ResourceNotFoundException("User Not Found: " + userEmail));
 
