@@ -6,6 +6,7 @@ import com.workflow.approval.repository.WorkflowDefinitionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class WorkflowDefinitionService {
@@ -24,5 +25,9 @@ public class WorkflowDefinitionService {
     public Optional<WorkflowDefinition> getWorkflowByRequestType(RequestType requestType)
     {
         return workflowDefinitionRepository.findByRequestType(requestType);
+    }
+
+    public List<WorkflowDefinition> getAllWorkflows() {
+        return workflowDefinitionRepository.findAll();
     }
 }

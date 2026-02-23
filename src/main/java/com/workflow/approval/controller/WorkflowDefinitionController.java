@@ -4,10 +4,9 @@ import com.workflow.approval.entity.RequestType;
 import com.workflow.approval.entity.WorkflowDefinition;
 import com.workflow.approval.service.WorkflowDefinitionService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/workflows")
@@ -29,5 +28,10 @@ public class WorkflowDefinitionController {
                 .build();
 
         return ResponseEntity.ok(workflowDefinitionService.createWorkflow(workflowDefinition));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<WorkflowDefinition>> getAllWorkflows() {
+        return ResponseEntity.ok(workflowDefinitionService.getAllWorkflows());
     }
 }
