@@ -49,5 +49,18 @@ public class RequestService {
                 ));
     }
 
+    public List<Request> getPendingRequestsForRole(String role) {
+
+        if (role.equals("ROLE_MANAGER")) {
+            return requestRepository.findByStatusAndCurrentStep(RequestStatus.PENDING, 1);
+        }
+
+        if (role.equals("ROLE_FINANCE")) {
+            return requestRepository.findByStatusAndCurrentStep(RequestStatus.PENDING, 2);
+        }
+
+        return List.of();
+    }
+
 
 }

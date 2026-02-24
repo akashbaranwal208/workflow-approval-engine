@@ -12,4 +12,7 @@ public interface RequestRepository extends JpaRepository<Request,Long> {
     List<Request> findByCreatedBy(User user);
 
     List<Request> findByStatus(RequestStatus status);
+
+    List<Request> findByStatusAndCurrentStep(RequestStatus status, Integer currentStep);
+
 }

@@ -55,4 +55,17 @@ public class RequestController {
     {
         return ResponseEntity.ok(requestService.getRequestsByStatus(status));
     }
+
+    @GetMapping("/pending")
+    public ResponseEntity<List<Request>> getPendingRequests(Authentication authentication) {
+
+        String role = authentication.getAuthorities()
+                .iterator()
+                .next()
+                .getAuthority();
+
+        List<Request> requests = requestService.getPendingRequestsForRole(role);
+
+        return ResponseEntity.ok(requests);
+    }
 }
