@@ -54,6 +54,25 @@ Request → JWT Filter → SecurityContext → Controller → Service
 
 ---
 
+## 🔐 Demo Credentials
+
+### 👤 Admin
+Email: admin@example.com  
+Password: password135
+
+### 👔 Manager
+Email: manager@example.com  
+Password: password567
+
+### 💼 Finance
+Email: finance@example.com  
+Password: password890
+
+### 👨‍💻 Employee
+Email: akash@example.com  
+Password: password123
+
+
 ## 🔄 Workflow Logic
 
 ### 1️⃣ LEAVE Request (Single Step)
