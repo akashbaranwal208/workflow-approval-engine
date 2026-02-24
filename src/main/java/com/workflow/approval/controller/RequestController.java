@@ -68,4 +68,17 @@ public class RequestController {
 
         return ResponseEntity.ok(requests);
     }
+
+    @GetMapping("/my")
+    public ResponseEntity<List<Request>> getMyRequests(Authentication authentication) {
+
+        String email = authentication.getName();
+
+        User user = userService.getUserByEmail(email)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found: " + email)
+                );
+
+        return ResponseEntity.ok(requestService.getRequestsByUser(user));
+    }
 }
