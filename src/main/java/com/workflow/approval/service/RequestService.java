@@ -13,18 +13,21 @@ public class RequestService {
     private final RequestRepository requestRepository;
     private final WorkflowDefinitionService workflowDefinitionService;
 
-
-    public RequestService(RequestRepository requestRepository, WorkflowDefinitionService workflowDefinitionService) {
+    public RequestService(RequestRepository requestRepository,
+                          WorkflowDefinitionService workflowDefinitionService) {
         this.requestRepository = requestRepository;
         this.workflowDefinitionService = workflowDefinitionService;
     }
 
-    public Request createRequest(RequestType requestType, User createdBy)
-    {
-        WorkflowDefinition workflowDefinition=workflowDefinitionService.getWorkflowByRequestType(requestType)
-                .orElseThrow(()->new IllegalStateException("No workflow defines for request type: "+ requestType));
+    public Request createRequest(RequestType requestType, User createdBy) {
 
-        Request request=Request.builder()
+        WorkflowDefinition workflowDefinition =
+                workflowDefinitionService.getWorkflowByRequestType(requestType)
+                        .orElseThrow(() ->
+                                new IllegalStateException("No workflow defined for request type: " + requestType)
+                        );
+
+        Request request = Request.builder()
                 .requestType(requestType)
                 .status(RequestStatus.PENDING)
                 .currentStep(1)
@@ -44,23 +47,22 @@ public class RequestService {
 
     public Request getRequestById(Long requestId) {
         return requestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Request not found with id: " + requestId
-                ));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Request not found with id: " + requestId)
+                );
     }
 
+    // ✅ FIXED METHOD
     public List<Request> getPendingRequestsForRole(String role) {
 
-        if (role.equals("ROLE_MANAGER")) {
+        if (role.equals("MANAGER")) {
             return requestRepository.findByStatusAndCurrentStep(RequestStatus.PENDING, 1);
         }
 
-        if (role.equals("ROLE_FINANCE")) {
+        if (role.equals("FINANCE")) {
             return requestRepository.findByStatusAndCurrentStep(RequestStatus.PENDING, 2);
         }
 
         return List.of();
     }
-
-
 }
