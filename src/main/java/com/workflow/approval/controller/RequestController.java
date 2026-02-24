@@ -72,8 +72,10 @@ public class RequestController {
     @GetMapping("/my")
     public ResponseEntity<List<Request>> getMyRequests(Authentication authentication) {
 
+        System.out.println("AUTH OBJECT: " + authentication);
         String email = authentication.getName();
 
+        System.out.println("EMAIL: "+ email);
         User user = userService.getUserByEmail(email)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("User not found: " + email)
