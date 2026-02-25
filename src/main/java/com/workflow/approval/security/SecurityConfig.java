@@ -44,7 +44,7 @@ public class SecurityConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://workflow-frontend-6ry967rig-akashbaranwal208s-projects.vercel.app/"
+                "https://workflow-frontend-puce.vercel.app"
         ));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
